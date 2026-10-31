@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard — SUBX by Brightloop Software</title>
+  <meta name="description" content="SUBX Customer Portal: Manage your active subscriptions, monthly expenses, savings, groceries, magazines, and cleaning service plans.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef2ff;
+      --violet-accent: #7c3aed; /* Exact violet colour required */
+      --violet-hover: #6d28d9;
+      --violet-light: #f5f3ff;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-light: #fffbeb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 3.5rem;
+    }
+
+    /* Top Navbar */
+    .top-nav {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+    }
+
+    .brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 4px 12px 4px 6px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+    }
+
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--violet-accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .user-pill span {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .btn-portal-back {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #fff;
+      transition: all 0.2s;
+    }
+
+    .btn-portal-back:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1140px;
+      margin: 2rem auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Top Welcome Heading */
+    .welcome-header {
+      margin-bottom: 1.75rem;
+    }
+
+    .welcome-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+      text-transform: capitalize;
+    }
+
+    .welcome-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* 3 Top Metric Boxes */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .metric-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .metric-box:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: #cbd5e1;
+    }
+
+    .metric-box.accent-blue { border-left: 4px solid var(--primary); }
+    .metric-box.accent-orange { border-left: 4px solid var(--warning); }
+    .metric-box.accent-green { border-left: 4px solid var(--success); }
+
+    .metric-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.65rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .metric-val {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      line-height: 1;
+      margin-bottom: 0.45rem;
+    }
+
+    .metric-footer {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Section: Product Management */
+    .section-header {
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .section-statement {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* 3 Product Boxes Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 920px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .product-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .product-box:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary);
+    }
+
+    .product-header-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .product-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .icon-groceries { background: #fef3c7; }
+    .icon-magazines { background: #e0e7ff; }
+    .icon-cleaning { background: #dcfce7; }
+
+    .product-heading {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      line-height: 1.45;
+      min-height: 38px;
+    }
+
+    /* Rate Breakdown Table in Indian Rupees */
+    .rates-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .rate-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .rate-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .rate-val {
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-mono, monospace);
+    }
+
+    /* Plan Select Selector */
+    .plan-selector-wrap {
+      margin-bottom: 0.85rem;
+    }
+
+    .plan-select-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .plan-select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .plan-select:focus {
+      border-color: var(--primary);
+    }
+
+    /* Subscribe Option Button */
+    .btn-subscribe {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-subscribe:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-subscribe:active {
+      transform: scale(0.98);
+    }
+
+    /* Bottom Two Columns Grid */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    /* Violet View Details / View All Link on Top Right Corner */
+    .view-details-violet {
+      color: var(--violet-accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      background: var(--violet-light);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .view-details-violet:hover {
+      background: #ede9fe;
+      color: var(--violet-hover);
+      border-color: var(--violet-accent);
+      text-decoration: underline;
+    }
+
+    /* Variant Items List */
+    .variant-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .variant-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+    }
+
+    .variant-item:hover {
+      background: #f1f5f9;
+    }
+
+    .variant-info h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .variant-price {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #fef3c7;
+      color: #92400e;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .star-icon {
+      color: #f59e0b;
+      font-size: 0.95rem;
+    }
+
+    /* Activity Items List */
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: transform 0.15s ease;
+    }
+
+    .activity-item:hover {
+      transform: translateX(2px);
+    }
+
+    .activity-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--violet-accent);
+      margin-top: 6px;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    }
+
+    .activity-dot.dot-success {
+      background: var(--success);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .activity-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Modal / Pop-up Page for Recent Activity */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      max-width: 600px;
+      width: 100%;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: slideUp 0.25s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: #fafafa;
+    }
+
+    .modal-header-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .modal-header h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .modal-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      background: var(--violet-light);
+      color: var(--violet-accent);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      line-height: 1;
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+    }
+
+    .modal-close:hover {
+      color: var(--text-main);
+      background: var(--border);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      background: #fafafa;
+    }
+
+    .btn-modal-close {
+      background: var(--violet-accent);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-modal-close:hover {
+      background: var(--violet-hover);
+    }
+
+    /* Modal Timeline */
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+    }
+
+    .timeline-item:hover {
+      background: #f1f5f9;
+    }
+
+    .timeline-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .icon-sub {
+      background: var(--violet-light);
+      color: var(--violet-accent);
+      border: 1px solid rgba(124, 58, 237, 0.3);
+    }
+
+    .icon-pay {
+      background: var(--success-light);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-point-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    .timeline-point-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: #0f172a;
+      color: #fff;
+      padding: 0.85rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: none;
+      box-shadow: var(--shadow-lg);
+      z-index: 9999;
+      animation: slideIn 0.25s ease-out;
+      border-left: 4px solid var(--success);
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-icon">S</div>
+      <div class="brand-text">
+        <h1>SUBX</h1>
+        <span>Brightloop Software</span>
+      </div>
+    </a>
+    <div class="nav-actions">
+      <div class="user-pill">
+        <div class="user-avatar">U</div>
+        <span>User</span>
+      </div>
+      <a href="index.html" class="btn-portal-back">Back to Main Hub</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Top Welcome Heading -->
+    <div class="welcome-header">
+      <h1 class="welcome-title">welcome back user</h1>
+      <p class="welcome-subtitle">Here is a summary of your active subscriptions, monthly expenses, and product plans.</p>
+    </div>
+
+    <!-- 3 Metric Boxes -->
+    <div class="metrics-grid">
+      <!-- Box 1: Active Subscriptions as 98 -->
+      <div class="metric-box accent-blue">
+        <span class="metric-label">Active Subscriptions</span>
+        <div class="metric-val" id="metricActiveSubs">98</div>
+        <div class="metric-footer">Currently active services & subscriptions</div>
+      </div>
+
+      <!-- Box 2: Monthly Expense showing 25000 -->
+      <div class="metric-box accent-orange">
+        <span class="metric-label">Monthly Expense</span>
+        <div class="metric-val" id="metricMonthlyExpense">₹25,000</div>
+        <div class="metric-footer">Total monthly recurring spend (25000)</div>
+      </div>
+
+      <!-- Box 3: Customer Savings as 4000 -->
+      <div class="metric-box accent-green">
+        <span class="metric-label">Customer Savings</span>
+        <div class="metric-val" id="metricCustomerSavings">₹4,000</div>
+        <div class="metric-footer">Bundle discounts & promo benefits applied (4000)</div>
+      </div>
+    </div>
+
+    <!-- Section: Product Management -->
+    <div class="section-header">
+      <h2 class="section-title">Product Management</h2>
+      <p class="section-statement">manage subscription products and plans</p>
+    </div>
+
+    <!-- 3 Product Boxes -->
+    <div class="products-grid">
+      <!-- Box 1: Groceries -->
+      <div class="product-box">
+        <div class="product-header-row">
+          <div class="product-icon icon-groceries">🥦</div>
+          <h3 class="product-heading">Groceries</h3>
+        </div>
+        <p class="product-desc">fresh groceries delivered to your doorstep</p>
+        
+        <div class="rates-box">
+          <div class="rate-row">
+            <span class="rate-label">Daily rate:</span>
+            <span class="rate-val">₹99/day</span>
+          </div>
+          <div class="rate-row">
+            <span class="rate-label">Weekly rate:</span>
+            <span class="rate-val">₹599/week</span>
+          </div>
+          <div class="rate-row">
+            <span class="rate-label">Monthly rate:</span>
+            <span class="rate-val">₹2,199/month</span>
+          </div>
+        </div>
+
+        <div class="plan-selector-wrap">
+          <label class="plan-select-label" for="selectPlanGroceries">Select Cadence</label>
+          <select class="plan-select" id="selectPlanGroceries">
+            <option value="Daily (₹99/day)">Daily — ₹99/day</option>
+            <option value="Weekly (₹599/week)">Weekly — ₹599/week</option>
+            <option value="Monthly (₹2,199/month)" selected>Monthly — ₹2,199/month</option>
+          </select>
+        </div>
+
+        <!-- Subscribe Option -->
+        <button type="button" class="btn-subscribe" id="btnSubscribeGroceries" onclick="handleSubscribe('Groceries', 'selectPlanGroceries')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Subscribe
+        </button>
+      </div>
+
+      <!-- Box 2: Magazines -->
+      <div class="product-box">
+        <div class="product-header-row">
+          <div class="product-icon icon-magazines">📰</div>
+          <h3 class="product-heading">Magazines</h3>
+        </div>
+        <p class="product-desc">get your favourite magazines</p>
+        
+        <div class="rates-box">
+          <div class="rate-row">
+            <span class="rate-label">Daily rate:</span>
+            <span class="rate-val">₹20/day</span>
+          </div>
+          <div class="rate-row">
+            <span class="rate-label">Weekly rate:</span>
+            <span class="rate-val">₹99/week</span>
+          </div>
+          <div class="rate-row">
+            <span class="rate-label">Monthly rate:</span>
+            <span class="rate-val">₹299/month</span>
+          </div>
+        </div>
+
+        <div class="plan-selector-wrap">
+          <label class="plan-select-label" for="selectPlanMagazines">Select Cadence</label>
+          <select class="plan-select" id="selectPlanMagazines">
+            <option value="Daily (₹20/day)">Daily — ₹20/day</option>
+            <option value="Weekly (₹99/week)">Weekly — ₹99/week</option>
+            <option value="Monthly (₹299/month)" selected>Monthly — ₹299/month</option>
+          </select>
+        </div>
+
+        <!-- Subscribe Option -->
+        <button type="button" class="btn-subscribe" id="btnSubscribeMagazines" onclick="handleSubscribe('Magazines', 'selectPlanMagazines')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Subscribe
+        </button>
+      </div>
+
+      <!-- Box 3: Cleaning Service -->
+      <div class="product-box">
+        <div class="product-header-row">
+          <div class="product-icon icon-cleaning">🧹</div>
+          <h3 class="product-heading">Cleaning Service</h3>
+        </div>
+        <p class="product-desc">keep your apartments clean</p>
+        
+        <div class="rates-box">
+          <div class="rate-row">
+            <span class="rate-label">Daily rate:</span>
+            <span class="rate-val">₹150/day</span>
+          </div>
+          <div class="rate-row">
+            <span class="rate-label">Weekly rate:</span>
+            <span class="rate-val">₹750/week</span>
+          </div>
+          <div class="rate-row">
+            <span class="rate-label">Monthly rate:</span>
+            <span class="rate-val">₹2,499/month</span>
+          </div>
+        </div>
+
+        <div class="plan-selector-wrap">
+          <label class="plan-select-label" for="selectPlanCleaning">Select Cadence</label>
+          <select class="plan-select" id="selectPlanCleaning">
+            <option value="Daily (₹150/day)">Daily — ₹150/day</option>
+            <option value="Weekly (₹750/week)">Weekly — ₹750/week</option>
+            <option value="Monthly (₹2,499/month)" selected>Monthly — ₹2,499/month</option>
+          </select>
+        </div>
+
+        <!-- Subscribe Option -->
+        <button type="button" class="btn-subscribe" id="btnSubscribeCleaning" onclick="handleSubscribe('Cleaning Service', 'selectPlanCleaning')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+          Subscribe
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Two Columns: Popular Variants & Recent Activity -->
+    <div class="bottom-grid">
+      <!-- Box A: Popular Variants -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <h3 class="panel-title">Popular Variants</h3>
+        </div>
+
+        <div class="variant-list">
+          <!-- Item 1: Premium grocery basket -->
+          <div class="variant-item">
+            <div class="variant-info">
+              <h4>Premium Grocery Basket</h4>
+              <div class="variant-price">₹699/month</div>
+            </div>
+            <div class="rating-badge">
+              <span class="star-icon">★</span>
+              <span>4.8</span>
+            </div>
+          </div>
+
+          <!-- Item 2: Lifestyle magazine -->
+          <div class="variant-item">
+            <div class="variant-info">
+              <h4>Lifestyle Magazine</h4>
+              <div class="variant-price">₹299/month</div>
+            </div>
+            <div class="rating-badge">
+              <span class="star-icon">★</span>
+              <span>4.7</span>
+            </div>
+          </div>
+
+          <!-- Item 3: Apartment cleaning -->
+          <div class="variant-item">
+            <div class="variant-info">
+              <h4>Apartment Cleaning</h4>
+              <div class="variant-price">₹999/month</div>
+            </div>
+            <div class="rating-badge">
+              <span class="star-icon">★</span>
+              <span>4.9</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box B: Recent Activity -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <h3 class="panel-title">Recent Activity</h3>
+          <!-- Top right corner: View details in violet colour -->
+          <a href="javascript:void(0)" class="view-details-violet" id="btnOpenRecentActivityModal" onclick="openActivityPopup()">
+            View Details &rarr;
+          </a>
+        </div>
+
+        <div class="activity-list" id="activityPreviewList">
+          <!-- Point 1: subscribed to premium basket show as 2 mins ago -->
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div class="activity-content">
+              <div class="activity-text">subscribed to premium basket</div>
+              <div class="activity-time">2 mins ago</div>
+            </div>
+          </div>
+
+          <!-- Point 2: subscribed to weekly cleaning show as 30 mins ago -->
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div class="activity-content">
+              <div class="activity-text">subscribed to weekly cleaning</div>
+              <div class="activity-time">30 mins ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== POP-UP PAGE: RECENT ACTIVITY AUDIT LOG ==================== -->
+  <div class="modal-overlay" id="recentActivityModal" role="dialog" aria-modal="true" aria-labelledby="activityModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-header-title-wrap">
+          <h3 id="activityModalTitle">Recent Activity</h3>
+          <span class="modal-badge">8 Events Recorded</span>
+        </div>
+        <button class="modal-close" aria-label="Close dialog" onclick="closeActivityPopup()">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="timeline-list">
+          <!-- Point 1: subscribed to premium basket show as 2 mins ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-sub">📦</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">subscribed to premium basket</div>
+              <div class="timeline-point-time">2 mins ago</div>
+            </div>
+          </div>
+
+          <!-- Point 2: subscribed to weekly cleaning show as 30 mins ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-sub">🧹</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">subscribed to weekly cleaning</div>
+              <div class="timeline-point-time">30 mins ago</div>
+            </div>
+          </div>
+
+          <!-- Point 3: payment successfull one day ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-pay">✓</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">payment successfull</div>
+              <div class="timeline-point-time">one day ago</div>
+            </div>
+          </div>
+
+          <!-- Point 4: subscribed to monthly cleaning 5 day ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-sub">🧹</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">subscribed to monthly cleaning</div>
+              <div class="timeline-point-time">5 day ago</div>
+            </div>
+          </div>
+
+          <!-- Point 5: payment successfull 8 days ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-pay">✓</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">payment successfull</div>
+              <div class="timeline-point-time">8 days ago</div>
+            </div>
+          </div>
+
+          <!-- Point 6: subscribed to monthly magazine 20 days -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-sub">📰</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">subscribed to monthly magazine</div>
+              <div class="timeline-point-time">20 days</div>
+            </div>
+          </div>
+
+          <!-- Point 7: payment successfull 1 month ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-pay">✓</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">payment successfull</div>
+              <div class="timeline-point-time">1 month ago</div>
+            </div>
+          </div>
+
+          <!-- Point 8: premium grocery basket one month ago -->
+          <div class="timeline-item">
+            <div class="timeline-icon-wrap icon-sub">🥦</div>
+            <div class="timeline-content">
+              <div class="timeline-point-title">premium grocery basket</div>
+              <div class="timeline-point-time">one month ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-close" onclick="closeActivityPopup()">Close Activity Page</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-box" id="toastBox">Action recorded successfully!</div>
+
+  <script>
+    let activeSubscriptionsCount = 98;
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastBox');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3500);
+    }
+
+    // Subscribe Option Action
+    function handleSubscribe(productName, selectId) {
+      const selectEl = document.getElementById(selectId);
+      const chosenCadence = selectEl ? selectEl.value : 'Standard Plan';
+      
+      activeSubscriptionsCount++;
+      const subsEl = document.getElementById('metricActiveSubs');
+      if (subsEl) {
+        subsEl.textContent = activeSubscriptionsCount;
+      }
+
+      showToast(`Subscribed to ${productName} (${chosenCadence})! Active count updated to ${activeSubscriptionsCount}.`);
+    }
+
+    // Open Recent Activity Pop-up Page
+    function openActivityPopup() {
+      const modal = document.getElementById('recentActivityModal');
+      if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    // Close Recent Activity Pop-up Page
+    function closeActivityPopup() {
+      const modal = document.getElementById('recentActivityModal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Dismiss on click outside modal card
+    document.getElementById('recentActivityModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeActivityPopup();
+      }
+    });
+
+    // Dismiss on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeActivityPopup();
+      }
+    });
+  </script>
+</body>
+</html>
