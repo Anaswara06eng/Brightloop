@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brightloop Software — Unified Subscription Business Platform</title>
+  <meta name="description" content="All-in-one subscription management, billing engine, quotation lifecycle, automated invoicing, discount rules, and real-time revenue analytics for Brightloop Software.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-light">
+  <!-- Top App Navigation / Role Switcher Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-badge">
+        <div class="brand-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">Brightloop<span class="brand-accent">.</span></span>
+          <span class="brand-subtitle">Subscription OS</span>
+        </div>
+      </div>
+
+      <div class="system-status-indicator">
+        <span class="pulse-dot"></span>
+        <span class="status-label">Engine Online</span>
+        <span class="version-tag">v2.6 Unified</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="role-selector-wrapper">
+        <span class="role-label">Active Persona:</span>
+        <div class="role-pill-group">
+          <button type="button" class="role-pill active" data-role="admin" id="btnRoleAdmin" title="Full system access: config, products, taxes, discounts, staff, analytics">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Admin (Alex)
+          </button>
+          <button type="button" class="role-pill" data-role="staff" id="btnRoleStaff" title="Internal team: day-to-day quotes, subscriptions, billing, payments">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Sales Staff (Sarah)
+          </button>
+          <button type="button" class="role-pill" data-role="customer" id="btnRoleCustomer" title="Self-service portal: view own subscriptions, toggle add-ons, pay invoices">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            Customer Portal (Apex)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <button class="btn btn-ghost btn-icon" id="btnThemeToggle" title="Toggle Dark/Light Mode">
+        <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg id="themeIconMoon" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
+      <button class="btn btn-outline btn-sm" id="btnSimulationDay" title="Advance calendar or run batch billing cycle">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span id="currentSimDateLabel">Today: 2026-10-31</span>
+      </button>
+
+      <div class="user-profile-menu" id="userProfileMenu">
+        <div class="user-avatar" id="headerUserAvatar">AV</div>
+        <div class="user-meta">
+          <span class="user-name" id="headerUserName">Alex Vance</span>
+          <span class="user-role-badge" id="headerUserRoleBadge">Admin</span>
+        </div>
+        <button class="btn btn-ghost btn-sm btn-icon" id="btnAuthModalToggle" title="Account Settings & Auth">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- App Body Layout -->
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-section-title">PLATFORM CORE</div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-view="dashboard" id="navDashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          <span>Finance & Executive</span>
+          <span class="nav-badge" id="badgeActiveSubs">0</span>
+        </button>
+
+        <button class="nav-item" data-view="subscriptions" id="navSubscriptions">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span>Subscriptions & Quotes</span>
+          <span class="nav-badge badge-warning" id="badgeDraftQuotes">0</span>
+        </button>
+
+        <button class="nav-item" data-view="invoices" id="navInvoices">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span>Invoices & Billing</span>
+          <span class="nav-badge badge-danger" id="badgeOverdueInvoices">0</span>
+        </button>
+
+        <button class="nav-item" data-view="payments" id="navPayments">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg>
+          <span>Payment Ledger</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-section-title admin-only-section">CATALOG & RULES (ADMIN)</div>
+      <nav class="sidebar-nav admin-only-nav">
+        <button class="nav-item" data-view="products" id="navProducts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <span>Products & Variants</span>
+        </button>
+
+        <button class="nav-item" data-view="plans" id="navPlans">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="20" x2="10" y2="10"/></svg>
+          <span>Plans & Policies</span>
+        </button>
+
+        <button class="nav-item" data-view="discounts" id="navDiscounts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="9" y1="9" x2="15" y2="15"/><circle cx="9.5" cy="9.5" r=".5" fill="currentColor"/><circle cx="14.5" cy="14.5" r=".5" fill="currentColor"/></svg>
+          <span>Discounts & Promos</span>
+        </button>
+
+        <button class="nav-item" data-view="staff" id="navStaff">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          <span>Staff Access Control</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-section-title customer-only-section">CUSTOMER SELF-SERVICE</div>
+      <nav class="sidebar-nav customer-only-nav">
+        <button class="nav-item" data-view="customer-portal" id="navCustomerPortal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>My Subscriptions & Add-ons</span>
+        </button>
+        <button class="nav-item" data-view="customer-invoices" id="navCustomerInvoices">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <span>My Invoices & Receipts</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="billing-runner-card">
+          <div class="runner-header">
+            <span class="runner-badge">Automated Billing</span>
+            <span class="runner-time">00:00 UTC</span>
+          </div>
+          <p class="runner-desc">Batch bill due subscriptions across all accounts with tax & discount enforcement.</p>
+          <button class="btn btn-primary btn-sm btn-block" id="btnTriggerBillingDay">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Run Billing Engine
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Stage -->
+    <main class="app-main" id="appMain">
+      <!-- Top View Header (Dynamically updated) -->
+      <div class="view-header" id="viewHeader">
+        <div>
+          <h1 class="view-title" id="viewTitle">Finance & Executive Overview</h1>
+          <p class="view-description" id="viewDescription">Real-time metrics on active recurring revenue, cash collections, and overdue receivables.</p>
+        </div>
+        <div class="view-actions" id="viewActions">
+          <!-- Dynamic Action Buttons will be rendered here -->
+        </div>
+      </div>
+
+      <!-- Live Performance Toast / Metric Counter -->
+      <div class="response-speed-ticker" id="responseSpeedTicker">
+        <span class="speed-icon">⚡</span> Rendered in <strong id="queryPerfTime">12ms</strong> (Target &lt; 2000ms) • Thousands of records processed client-side
+      </div>
+
+      <!-- Container for dynamic Views -->
+      <div class="view-content" id="viewContent">
+        <!-- Dashboard View -->
+        <section class="view-pane active" id="pane-dashboard">
+          <!-- KPI Metrics Row -->
+          <div class="metrics-grid">
+            <div class="metric-card glass-card">
+              <div class="metric-header">
+                <span class="metric-title">Active Subscriptions</span>
+                <span class="metric-icon-wrap icon-blue">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+              </div>
+              <div class="metric-value" id="kpiActiveCount">0</div>
+              <div class="metric-footer">
+                <span class="metric-trend trend-positive" id="kpiActiveTrend">↑ 14% MoM</span>
+                <span class="metric-subtext">across 24 accounts</span>
+              </div>
+            </div>
+
+            <div class="metric-card glass-card">
+              <div class="metric-header">
+                <span class="metric-title">Monthly Recurring Revenue (MRR)</span>
+                <span class="metric-icon-wrap icon-green">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </span>
+              </div>
+              <div class="metric-value" id="kpiMRR">$0.00</div>
+              <div class="metric-footer">
+                <span class="metric-trend trend-positive" id="kpiARRValue">ARR: $0.00</span>
+                <span class="metric-subtext">Run-rate pace</span>
+              </div>
+            </div>
+
+            <div class="metric-card glass-card">
+              <div class="metric-header">
+                <span class="metric-title">Total Cash Collected</span>
+                <span class="metric-icon-wrap icon-purple">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </div>
+              <div class="metric-value" id="kpiCollected">$0.00</div>
+              <div class="metric-footer">
+                <span class="metric-trend trend-neutral" id="kpiPaymentCount">0 Payments</span>
+                <span class="metric-subtext">settled to date</span>
+              </div>
+            </div>
+
+            <div class="metric-card glass-card warning-accent">
+              <div class="metric-header">
+                <span class="metric-title">Overdue Receivables</span>
+                <span class="metric-icon-wrap icon-red">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </span>
+              </div>
+              <div class="metric-value text-danger" id="kpiOverdue">$0.00</div>
+              <div class="metric-footer">
+                <span class="metric-trend trend-negative" id="kpiOverdueCount">0 Invoices</span>
+                <span class="metric-subtext">requiring chase</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts & Visual Breakdown Grid -->
+          <div class="dashboard-grid">
+            <div class="chart-card glass-card">
+              <div class="chart-header">
+                <div>
+                  <h3 class="chart-title">Revenue Trajectory & Invoicing Flow</h3>
+                  <p class="chart-subtitle">Monthly breakdown of billed revenue vs. collected payments</p>
+                </div>
+                <div class="chart-actions">
+                  <span class="legend-chip"><span class="legend-dot bg-brand"></span> Invoiced</span>
+                  <span class="legend-chip"><span class="legend-dot bg-success"></span> Collected</span>
+                </div>
+              </div>
+              <div class="chart-container" id="revenueBarChart">
+                <!-- SVG bar chart rendered via JS -->
+              </div>
+            </div>
+
+            <div class="chart-card glass-card">
+              <div class="chart-header">
+                <div>
+                  <h3 class="chart-title">Plan Distribution</h3>
+                  <p class="chart-subtitle">Revenue share by billing frequency and tier</p>
+                </div>
+              </div>
+              <div class="chart-container" id="planDonutChart">
+                <!-- SVG donut or segment chart rendered via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Urgent Overdue Chasing Table -->
+          <div class="data-card glass-card mt-6">
+            <div class="data-card-header">
+              <div>
+                <h3 class="card-title">🚨 Outstanding & Overdue Invoices</h3>
+                <p class="card-subtitle">Invoices requiring immediate dunning action before turning into revenue leakage.</p>
+              </div>
+              <div class="card-header-actions">
+                <button class="btn btn-outline btn-sm" id="btnBatchChaseOverdue">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  Chase All Overdue
+                </button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table" id="tableOverdueSummary">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Customer</th>
+                    <th>Due Date</th>
+                    <th>Days Overdue</th>
+                    <th>Total</th>
+                    <th>Balance Due</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyOverdueInvoices">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subscriptions & Quotes View -->
+        <section class="view-pane" id="pane-subscriptions">
+          <div class="filter-bar glass-card">
+            <div class="filter-group">
+              <div class="search-input-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="subSearchInput" placeholder="Search by ID, customer name or plan..." class="form-control">
+              </div>
+              <select id="subStatusFilter" class="form-control">
+                <option value="ALL">All Statuses</option>
+                <option value="Draft">Draft</option>
+                <option value="Quotation">Quotation</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Active">Active</option>
+                <option value="Paused">Paused</option>
+                <option value="Closed">Closed</option>
+              </select>
+              <select id="subPlanFilter" class="form-control">
+                <option value="ALL">All Plans</option>
+              </select>
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-outline btn-sm" id="btnNewFromTemplate">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+                From Template
+              </button>
+              <button class="btn btn-primary btn-sm" id="btnCreateSubscription">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                New Subscription / Quote
+              </button>
+            </div>
+          </div>
+
+          <div class="data-card glass-card">
+            <div class="table-responsive">
+              <table class="data-table" id="tableSubscriptions">
+                <thead>
+                  <tr>
+                    <th>Sub #</th>
+                    <th>Customer</th>
+                    <th>Plan & Frequency</th>
+                    <th>Start Date</th>
+                    <th>Next Bill / Expiry</th>
+                    <th>Line Items</th>
+                    <th>Recurring Total</th>
+                    <th>Lifecycle Stage</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodySubscriptions">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Invoices View -->
+        <section class="view-pane" id="pane-invoices">
+          <div class="filter-bar glass-card">
+            <div class="filter-group">
+              <div class="search-input-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="invSearchInput" placeholder="Search invoices by INV#, customer..." class="form-control">
+              </div>
+              <select id="invStatusFilter" class="form-control">
+                <option value="ALL">All Statuses</option>
+                <option value="Draft">Draft</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Paid">Paid</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-secondary btn-sm" id="btnExportInvoicesCSV">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export CSV
+              </button>
+              <button class="btn btn-primary btn-sm" id="btnManualInvoice">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Create Ad-Hoc Invoice
+              </button>
+            </div>
+          </div>
+
+          <div class="data-card glass-card">
+            <div class="table-responsive">
+              <table class="data-table" id="tableInvoices">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Customer</th>
+                    <th>Subscription</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Subtotal</th>
+                    <th>Tax & Disc</th>
+                    <th>Total</th>
+                    <th>Paid</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyInvoices">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Payments Ledger View -->
+        <section class="view-pane" id="pane-payments">
+          <div class="filter-bar glass-card">
+            <div class="filter-group">
+              <div class="search-input-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="paySearchInput" placeholder="Search payments by Ref#, Invoice, Customer..." class="form-control">
+              </div>
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-primary btn-sm" id="btnRecordPaymentModal">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Record Payment
+              </button>
+            </div>
+          </div>
+
+          <div class="data-card glass-card">
+            <div class="table-responsive">
+              <table class="data-table" id="tablePayments">
+                <thead>
+                  <tr>
+                    <th>Payment Ref</th>
+                    <th>Date</th>
+                    <th>Invoice #</th>
+                    <th>Customer</th>
+                    <th>Method</th>
+                    <th>Amount</th>
+                    <th>Notes</th>
+                    <th>Recorded By</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyPayments">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Products & Variants View (Admin) -->
+        <section class="view-pane" id="pane-products">
+          <div class="section-actions-bar">
+            <div>
+              <h2 class="section-heading">Product Catalog & Variant System</h2>
+              <p class="section-subheading">Define core subscription software, switchable add-ons, and brand/tier variants.</p>
+            </div>
+            <button class="btn btn-primary" id="btnOpenNewProductModal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Product
+            </button>
+          </div>
+
+          <div class="product-grid" id="productGridCards">
+            <!-- Product Cards rendered dynamically -->
+          </div>
+        </section>
+
+        <!-- Plans & Policies View (Admin) -->
+        <section class="view-pane" id="pane-plans">
+          <div class="section-actions-bar">
+            <div>
+              <h2 class="section-heading">Subscription Plans & Lifecycle Rules</h2>
+              <p class="section-subheading">Configure recurring pricing, billing cadences (daily, weekly, monthly, yearly), and auto-closure/pause policies.</p>
+            </div>
+            <button class="btn btn-primary" id="btnOpenNewPlanModal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Subscription Plan
+            </button>
+          </div>
+
+          <div class="plans-grid" id="plansGridCards">
+            <!-- Plans rendered dynamically -->
+          </div>
+        </section>
+
+        <!-- Discounts & Promos View (Admin) -->
+        <section class="view-pane" id="pane-discounts">
+          <div class="section-actions-bar">
+            <div>
+              <h2 class="section-heading">Smart Discount & Promotion Rules</h2>
+              <p class="section-subheading">Admin-only: create volume incentives, percentage or fixed reductions, expiration controls, and product/seat-specific scopes.</p>
+            </div>
+            <button class="btn btn-primary" id="btnOpenNewDiscountModal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Create Discount Rule
+            </button>
+          </div>
+
+          <div class="data-card glass-card">
+            <div class="table-responsive">
+              <table class="data-table" id="tableDiscounts">
+                <thead>
+                  <tr>
+                    <th>Promo Code</th>
+                    <th>Type & Value</th>
+                    <th>Minimum Req</th>
+                    <th>Applies To</th>
+                    <th>Validity Period</th>
+                    <th>Usage / Limit</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyDiscounts">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Staff Access Control View (Admin) -->
+        <section class="view-pane" id="pane-staff">
+          <div class="section-actions-bar">
+            <div>
+              <h2 class="section-heading">Internal Team & Access Control (RBAC)</h2>
+              <p class="section-subheading">Strict security: only the Administrator can invite, assign, and provision internal staff credentials.</p>
+            </div>
+            <button class="btn btn-primary" id="btnOpenNewStaffModal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Staff Member
+            </button>
+          </div>
+
+          <div class="data-card glass-card">
+            <div class="table-responsive">
+              <table class="data-table" id="tableStaff">
+                <thead>
+                  <tr>
+                    <th>Staff Name</th>
+                    <th>Email Address</th>
+                    <th>Role Privilege</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Last Active</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyStaff">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Customer Self-Service Portal View -->
+        <section class="view-pane" id="pane-customer-portal">
+          <div class="customer-welcome-hero glass-card">
+            <div class="customer-hero-content">
+              <span class="badge badge-success">Live Customer Portal</span>
+              <h2>Welcome back, <span id="customerPortalOrgName">Apex Retailers</span></h2>
+              <p>Self-manage your subscriptions, turn modular add-ons on or off instantly without support tickets, and view invoices.</p>
+            </div>
+            <div class="customer-quick-stats">
+              <div class="quick-stat-box">
+                <span class="stat-label">Active Plan</span>
+                <span class="stat-val" id="custPortalPlanName">Growth Monthly</span>
+              </div>
+              <div class="quick-stat-box">
+                <span class="stat-label">Next Renewal</span>
+                <span class="stat-val" id="custPortalNextRenewal">2026-11-15</span>
+              </div>
+              <div class="quick-stat-box">
+                <span class="stat-label">Pending Invoices</span>
+                <span class="stat-val text-warning" id="custPortalPendingInvoices">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="customer-grid mt-6">
+            <!-- Active Subscriptions -->
+            <div class="data-card glass-card">
+              <div class="data-card-header">
+                <div>
+                  <h3 class="card-title">My Active Subscriptions</h3>
+                  <p class="card-subtitle">Your live software licenses and active contracts.</p>
+                </div>
+              </div>
+              <div id="customerSubsContainer" class="customer-subs-list">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+
+            <!-- Add-on Switchboard -->
+            <div class="data-card glass-card">
+              <div class="data-card-header">
+                <div>
+                  <h3 class="card-title">Modular Add-ons Switchboard</h3>
+                  <p class="card-subtitle">Toggle on/off features instantly. Billed pro-rata automatically.</p>
+                </div>
+              </div>
+              <div class="addon-switchboard" id="customerAddonSwitchboard">
+                <!-- Addons toggles rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Customer Invoices View -->
+        <section class="view-pane" id="pane-customer-invoices">
+          <div class="data-card glass-card">
+            <div class="data-card-header">
+              <div>
+                <h3 class="card-title">My Billing & Receipts</h3>
+                <p class="card-subtitle">Download official tax invoices and pay outstanding balances securely.</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Total</th>
+                    <th>Balance Due</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyCustomerInvoices">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Modal: Authentication / Sign Up / Password Reset -->
+  <div class="modal-backdrop" id="modalAuth">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title" id="authModalTitle">Account Access & Security</h3>
+        <button class="modal-close" id="btnCloseAuthModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-auth-mode="signup" id="tabAuthSignUp">Sign Up</button>
+          <button class="auth-tab" data-auth-mode="login" id="tabAuthLogin">Sign In</button>
+          <button class="auth-tab" data-auth-mode="reset" id="tabAuthReset">Forgot Password</button>
+        </div>
+
+        <!-- Sign Up Form -->
+        <form id="formSignUp" class="auth-form-pane active">
+          <div class="form-group">
+            <label for="signUpName">Full Name / Business Name <span class="required">*</span></label>
+            <input type="text" id="signUpName" class="form-control" placeholder="e.g. Acme Tech Solutions" required>
+          </div>
+          <div class="form-group">
+            <label for="signUpEmail">Email Address <span class="required">* (Unique)</span></label>
+            <input type="email" id="signUpEmail" class="form-control" placeholder="name@business.com" required>
+            <small class="form-help">Each email can belong to only one account in Brightloop.</small>
+          </div>
+          <div class="form-group">
+            <label for="signUpPassword">Password <span class="required">*</span></label>
+            <input type="password" id="signUpPassword" class="form-control" placeholder="••••••••••••" required>
+            <!-- Password Validation Checklist -->
+            <div class="password-reqs" id="passwordReqs">
+              <div class="req-item" id="reqLen"><span>✕</span> More than 8 characters</div>
+              <div class="req-item" id="reqUpper"><span>✕</span> At least one uppercase letter (A-Z)</div>
+              <div class="req-item" id="reqLower"><span>✕</span> At least one lowercase letter (a-z)</div>
+              <div class="req-item" id="reqSpecial"><span>✕</span> At least one special character (!@#$%^&*...)</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signUpRole">Register As</label>
+            <select id="signUpRole" class="form-control">
+              <option value="customer">Customer (Self-service Portal)</option>
+              <option value="staff">Internal Staff (Sales / Support)</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-block">Create Brightloop Account</button>
+          </div>
+        </form>
+
+        <!-- Sign In Form -->
+        <form id="formSignIn" class="auth-form-pane">
+          <div class="form-group">
+            <label for="signInEmail">Email Address</label>
+            <input type="email" id="signInEmail" class="form-control" placeholder="alex@brightloop.io" required>
+          </div>
+          <div class="form-group">
+            <label for="signInPassword">Password</label>
+            <input type="password" id="signInPassword" class="form-control" placeholder="••••••••••••" required>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+        </form>
+
+        <!-- Forgot Password Form -->
+        <form id="formForgotPass" class="auth-form-pane">
+          <p class="text-muted text-sm mb-4">Enter your registered email address. We will verify your account and simulate dispatching a secure one-time password reset link.</p>
+          <div class="form-group">
+            <label for="resetEmail">Registered Email Address</label>
+            <input type="email" id="resetEmail" class="form-control" placeholder="your@email.com" required>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary btn-block">Send Reset Link</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Create / Edit Subscription or Quote -->
+  <div class="modal-backdrop" id="modalSubscription">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalSubTitle">Create New Subscription / Quotation</h3>
+        <button class="modal-close" id="btnCloseSubModal">&times;</button>
+      </div>
+      <form id="formSubscription">
+        <div class="modal-body">
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label for="subCustomerSelect">Customer <span class="required">*</span></label>
+              <select id="subCustomerSelect" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+              <label for="subPlanSelect">Plan & Billing Cadence <span class="required">*</span></label>
+              <select id="subPlanSelect" class="form-control" required></select>
+            </div>
+            <div class="form-group">
+              <label for="subPaymentTerms">Payment Terms <span class="required">*</span></label>
+              <select id="subPaymentTerms" class="form-control" required>
+                <option value="Immediate">Immediate / Due upon receipt</option>
+                <option value="Net 15">Net 15 Days</option>
+                <option value="Net 30" selected>Net 30 Days</option>
+                <option value="Net 60">Net 60 Days</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label for="subStartDate">Start Date <span class="required">*</span></label>
+              <input type="date" id="subStartDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="subExpiryDate">Expiry / Contract End Date</label>
+              <input type="date" id="subExpiryDate" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="subInitialStage">Initial Stage</label>
+              <select id="subInitialStage" class="form-control">
+                <option value="Draft">Draft</option>
+                <option value="Quotation" selected>Quotation (Quote Offer)</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Active">Active (Instant Live)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subApplyDiscount">Apply Discount Rule (Optional)</label>
+            <select id="subApplyDiscount" class="form-control">
+              <option value="">-- No Discount Applied --</option>
+            </select>
+          </div>
+
+          <!-- Line Items Table -->
+          <div class="line-items-wrapper">
+            <div class="line-items-header">
+              <h4>Subscription Line Items & Products</h4>
+              <button type="button" class="btn btn-outline btn-xs" id="btnAddSubLine">
+                + Add Line Item
+              </button>
+            </div>
+            <table class="line-table" id="tableSubLineItems">
+              <thead>
+                <tr>
+                  <th style="width: 32%;">Product & Variant</th>
+                  <th style="width: 14%;">Qty</th>
+                  <th style="width: 18%;">Unit Price ($)</th>
+                  <th style="width: 18%;">Tax</th>
+                  <th style="width: 14%;">Amount</th>
+                  <th style="width: 4%;"></th>
+                </tr>
+              </thead>
+              <tbody id="tbodySubLines">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+
+            <div class="sub-totals-summary" id="subTotalsSummary">
+              <div class="summary-line"><span>Subtotal:</span> <strong id="lblModalSubtotal">$0.00</strong></div>
+              <div class="summary-line"><span>Estimated Tax:</span> <strong id="lblModalTax">$0.00</strong></div>
+              <div class="summary-line text-success"><span>Discount:</span> <strong id="lblModalDiscount">-$0.00</strong></div>
+              <div class="summary-line total"><span>Recurring Total:</span> <strong id="lblModalTotal">$0.00</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCancelSubModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveSubscription">Save Subscription / Quote</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Quotation Template Picker -->
+  <div class="modal-backdrop" id="modalTemplatePicker">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title">Start from Quotation Template</h3>
+        <button class="modal-close" id="btnCloseTemplateModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted text-sm mb-4">Choose a pre-configured quotation template that already contains verified plan tiers, bundle products, and validity duration.</p>
+        <div class="template-list" id="templateListCards">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: View Subscription Details & Lifecycle State Transition -->
+  <div class="modal-backdrop" id="modalViewSubDetails">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header">
+        <div class="header-with-badge">
+          <h3 class="modal-title" id="viewSubNumber">SUB-2026-001</h3>
+          <span class="badge" id="viewSubBadge">Active</span>
+        </div>
+        <button class="modal-close" id="btnCloseViewSubModal">&times;</button>
+      </div>
+      <div class="modal-body" id="viewSubModalBody">
+        <!-- Injected via JS -->
+      </div>
+      <div class="modal-footer" id="viewSubModalFooter">
+        <!-- Dynamic state action buttons -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Invoice Details / Printable View / Payment -->
+  <div class="modal-backdrop" id="modalInvoiceDetails">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-header printable-hide">
+        <h3 class="modal-title">Invoice Review & Dispatch</h3>
+        <div class="modal-actions-right">
+          <button class="btn btn-outline btn-sm" id="btnPrintInvoice">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / PDF
+          </button>
+          <button class="btn btn-secondary btn-sm" id="btnSendInvoiceEmail">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Send to Customer
+          </button>
+          <button class="modal-close" id="btnCloseInvoiceModal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" id="invoicePrintableArea">
+        <!-- Rendered invoice printable document -->
+      </div>
+      <div class="modal-footer printable-hide" id="invoiceDetailsFooter">
+        <!-- Action buttons (Confirm, Pay, Cancel) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Record Payment -->
+  <div class="modal-backdrop" id="modalRecordPayment">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title">Record Incoming Payment</h3>
+        <button class="modal-close" id="btnClosePaymentModal">&times;</button>
+      </div>
+      <form id="formRecordPayment">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="payInvoiceSelect">Target Outstanding Invoice <span class="required">*</span></label>
+            <select id="payInvoiceSelect" class="form-control" required></select>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="payAmount">Amount Received ($) <span class="required">*</span></label>
+              <input type="number" id="payAmount" step="0.01" min="0.01" class="form-control" required>
+              <small class="form-help" id="payAmountRemainingHelp">Remaining balance: $0.00</small>
+            </div>
+            <div class="form-group">
+              <label for="payMethod">Payment Method <span class="required">*</span></label>
+              <select id="payMethod" class="form-control" required>
+                <option value="Credit Card">Credit Card (Stripe/Card)</option>
+                <option value="Bank Wire">Bank Wire / ACH</option>
+                <option value="Direct Debit">Direct Debit (SEPA)</option>
+                <option value="Check">Check / Corporate draft</option>
+                <option value="Cash / Other">Cash / Manual</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="payDate">Payment Date <span class="required">*</span></label>
+            <input type="date" id="payDate" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="payNotes">Reference / Transaction Notes</label>
+            <input type="text" id="payNotes" class="form-control" placeholder="e.g. Wire Ref #TXN-98402, Chase Bank">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCancelPaymentModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm & Register Payment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Product (Admin) -->
+  <div class="modal-backdrop" id="modalProduct">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalProductTitle">New Product & Variant Setup</h3>
+        <button class="modal-close" id="btnCloseProductModal">&times;</button>
+      </div>
+      <form id="formProduct">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="prodName">Product Name <span class="required">*</span></label>
+            <input type="text" id="prodName" class="form-control" placeholder="e.g. Cloud Security Shield" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="prodType">Product Type <span class="required">*</span></label>
+              <select id="prodType" class="form-control" required>
+                <option value="Software">Business Software</option>
+                <option value="Add-on">Switchable Add-on</option>
+                <option value="Service">Professional Service</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prodSalesPrice">Base Sales Price ($) <span class="required">*</span></label>
+              <input type="number" id="prodSalesPrice" step="0.01" min="0" class="form-control" placeholder="199.00" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="prodCostPrice">Cost Price ($)</label>
+            <input type="number" id="prodCostPrice" step="0.01" min="0" class="form-control" placeholder="45.00">
+          </div>
+          <div class="form-group">
+            <label for="prodNotes">Internal Notes & Description</label>
+            <textarea id="prodNotes" class="form-control" rows="2" placeholder="Key features, SLA level, provisioning details..."></textarea>
+          </div>
+
+          <!-- Product Variant Config -->
+          <div class="variant-builder-box">
+            <label class="variant-title">Product Variants (e.g. Brand, Edition)</label>
+            <p class="text-xs text-muted mb-2">Configure brand or edition variants where selecting a brand (like Odoo Brand) adds a specific surcharge.</p>
+            <div id="variantItemsList">
+              <!-- Rendered items -->
+            </div>
+            <button type="button" class="btn btn-outline btn-xs mt-2" id="btnAddVariantItem">+ Add Variant Option</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCancelProductModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Plan (Admin) -->
+  <div class="modal-backdrop" id="modalPlan">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalPlanTitle">Define Subscription Plan & Policies</h3>
+        <button class="modal-close" id="btnClosePlanModal">&times;</button>
+      </div>
+      <form id="formPlan">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="planName">Plan Name <span class="required">*</span></label>
+            <input type="text" id="planName" class="form-control" placeholder="e.g. Enterprise Annual" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="planCost">Recurring Cost ($) <span class="required">*</span></label>
+              <input type="number" id="planCost" step="0.01" min="0" class="form-control" placeholder="499.00" required>
+            </div>
+            <div class="form-group">
+              <label for="planFrequency">Billing Frequency <span class="required">*</span></label>
+              <select id="planFrequency" class="form-control" required>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly" selected>Monthly</option>
+                <option value="Yearly">Yearly</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label for="planMinQty">Minimum Quantity <span class="required">*</span></label>
+              <input type="number" id="planMinQty" min="1" value="1" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="planAvailableStart">Available From</label>
+              <input type="date" id="planAvailableStart" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="planAvailableEnd">Available Until</label>
+              <input type="date" id="planAvailableEnd" class="form-control">
+            </div>
+          </div>
+
+          <div class="plan-lifecycle-rules">
+            <label class="variant-title">Lifecycle & Policy Rules (Admin Controlled)</label>
+            <div class="checkbox-group mt-2">
+              <label class="custom-checkbox">
+                <input type="checkbox" id="ruleAutoClose">
+                <span><strong>Auto-close on end:</strong> Close subscription automatically when expiry date is reached</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" id="ruleAllowEarlyClose" checked>
+                <span><strong>Allow early cancellation:</strong> Customer or staff can terminate early</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" id="ruleAllowPause" checked>
+                <span><strong>Allow pause:</strong> Subscription can be temporarily suspended</span>
+              </label>
+              <label class="custom-checkbox">
+                <input type="checkbox" id="ruleAllowRenew" checked>
+                <span><strong>Allow renewal:</strong> Automatically or manually renewable for subsequent terms</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCancelPlanModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Plan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Create Discount Rule (Admin) -->
+  <div class="modal-backdrop" id="modalDiscount">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Admin Discount Rule</h3>
+        <button class="modal-close" id="btnCloseDiscountModal">&times;</button>
+      </div>
+      <form id="formDiscount">
+        <div class="modal-body">
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="discCode">Discount Promo Code <span class="required">*</span></label>
+              <input type="text" id="discCode" class="form-control uppercase" placeholder="e.g. SEATSALE20" required>
+            </div>
+            <div class="form-group">
+              <label for="discType">Discount Type <span class="required">*</span></label>
+              <select id="discType" class="form-control" required>
+                <option value="Percentage">Percentage (%)</option>
+                <option value="Fixed">Fixed Amount ($)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="discValue">Discount Value <span class="required">*</span></label>
+              <input type="number" id="discValue" step="0.01" min="0.01" class="form-control" placeholder="20" required>
+            </div>
+            <div class="form-group">
+              <label for="discUsageLimit">Usage Limit (Times)</label>
+              <input type="number" id="discUsageLimit" min="1" class="form-control" placeholder="e.g. 50 (blank = unlimited)">
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="discMinPurchase">Min Purchase Amount ($)</label>
+              <input type="number" id="discMinPurchase" step="0.01" min="0" class="form-control" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="discMinQty">Min Seat Quantity</label>
+              <input type="number" id="discMinQty" min="1" class="form-control" placeholder="1">
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="discStartDate">Start Date</label>
+              <input type="date" id="discStartDate" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="discEndDate">End Date</label>
+              <input type="date" id="discEndDate" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="discScope">Discount Application Scope</label>
+            <select id="discScope" class="form-control">
+              <option value="ALL">Whole Subscription Order</option>
+              <option value="SPECIFIC">Specific Product Line</option>
+            </select>
+          </div>
+          <div class="form-group hidden" id="discProductWrap">
+            <label for="discTargetProduct">Target Product</label>
+            <select id="discTargetProduct" class="form-control"></select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCancelDiscountModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Discount Rule</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Staff Member (Admin Only) -->
+  <div class="modal-backdrop" id="modalStaff">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <h3 class="modal-title">Provision New Staff Member</h3>
+        <button class="modal-close" id="btnCloseStaffModal">&times;</button>
+      </div>
+      <form id="formStaff">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="staffName">Staff Full Name <span class="required">*</span></label>
+            <input type="text" id="staffName" class="form-control" placeholder="e.g. Jordan Lee" required>
+          </div>
+          <div class="form-group">
+            <label for="staffEmail">Internal Work Email <span class="required">*</span></label>
+            <input type="email" id="staffEmail" class="form-control" placeholder="jordan@brightloop.io" required>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="staffRole">Role Privilege <span class="required">*</span></label>
+              <select id="staffRole" class="form-control" required>
+                <option value="staff">Internal Staff (Day-to-day operations)</option>
+                <option value="admin">Administrator (Full authority)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="staffDept">Department</label>
+              <select id="staffDept" class="form-control">
+                <option value="Sales">Sales & Quoting</option>
+                <option value="Finance & Billing">Finance & Billing</option>
+                <option value="Customer Success">Customer Success</option>
+                <option value="Operations">Operations</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="staffTempPass">Initial Password <span class="required">*</span></label>
+            <input type="password" id="staffTempPass" class="form-control" value="Brightloop@2026" required>
+            <small class="form-help">Must follow password policy (>8 chars, uppercase, lowercase, special char).</small>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="btnCancelStaffModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Staff Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
