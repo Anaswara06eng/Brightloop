@@ -10,8 +10,8 @@
   // ==========================================
   // STORAGE KEYS & CONSTANTS
   // ==========================================
-  const STORAGE_KEY = 'brightloop_os_v2_data';
-  const THEME_KEY = 'brightloop_theme_pref';
+  const STORAGE_KEY = 'subx_brightloop_os_v3_data';
+  const THEME_KEY = 'subx_theme_pref';
 
   // ==========================================
   // INITIAL RICH SEED DATABASE
@@ -20,15 +20,15 @@
     simulationDate: '2026-10-31',
     currentUser: {
       id: 'usr-admin-1',
-      name: 'Alex Vance',
-      email: 'alex@brightloop.io',
+      name: 'System Admin',
+      email: 'Admin@gmail.com',
       role: 'admin', // 'admin', 'staff', 'customer'
-      avatar: 'AV'
+      avatar: 'AD'
     },
     users: [
-      { id: 'usr-admin-1', name: 'Alex Vance', email: 'alex@brightloop.io', role: 'admin', dept: 'Executive', status: 'Active', lastActive: 'Just now' },
-      { id: 'usr-staff-1', name: 'Sarah Connor', email: 'sarah@brightloop.io', role: 'staff', dept: 'Sales & Quoting', status: 'Active', lastActive: '10 mins ago' },
-      { id: 'usr-staff-2', name: 'Dave Miller', email: 'dave@brightloop.io', role: 'staff', dept: 'Finance & Billing', status: 'Active', lastActive: '1 hour ago' },
+      { id: 'usr-admin-1', name: 'System Admin', email: 'Admin@gmail.com', role: 'admin', dept: 'Executive Administration', status: 'Active', lastActive: 'Just now' },
+      { id: 'usr-staff-1', name: 'Sarah Connor', email: 'sarahSUBX@gmail.com', role: 'staff', dept: 'Sales & Quoting', status: 'Active', lastActive: '10 mins ago' },
+      { id: 'usr-staff-2', name: 'Anila Patel', email: 'anilaSUBX@gmail.com', role: 'staff', dept: 'Operations & Billing', status: 'Active', lastActive: '1 hour ago' },
       { id: 'usr-cust-1', name: 'Apex Retailers', email: 'apex@retail.com', role: 'customer', dept: 'Client', status: 'Active', lastActive: 'Yesterday' },
       { id: 'usr-cust-2', name: 'Nova Tech Labs', email: 'billing@novatech.io', role: 'customer', dept: 'Client', status: 'Active', lastActive: '3 days ago' },
       { id: 'usr-cust-3', name: 'Global Dynamics Inc.', email: 'finance@globaldynamics.com', role: 'customer', dept: 'Client', status: 'Active', lastActive: '5 days ago' }
@@ -246,7 +246,7 @@
     subscriptions: [
       {
         id: 'sub-1',
-        subNumber: 'SUB-2026-001',
+        subNumber: 'SUBX-2026-001',
         customerId: 'cust-1', // Apex Retailers
         planId: 'plan-2', // Growth Monthly
         paymentTerms: 'Net 30',
@@ -270,7 +270,7 @@
       },
       {
         id: 'sub-2',
-        subNumber: 'SUB-2026-002',
+        subNumber: 'SUBX-2026-002',
         customerId: 'cust-2', // Nova Tech Labs
         planId: 'plan-3', // Enterprise Annual
         paymentTerms: 'Net 30',
@@ -290,7 +290,7 @@
       },
       {
         id: 'sub-3',
-        subNumber: 'SUB-2026-003',
+        subNumber: 'SUBX-2026-003',
         customerId: 'cust-3', // Global Dynamics
         planId: 'plan-3',
         paymentTerms: 'Net 60',
@@ -309,7 +309,7 @@
       },
       {
         id: 'sub-4',
-        subNumber: 'SUB-2026-004',
+        subNumber: 'SUBX-2026-004',
         customerId: 'cust-4', // Bean & Leaf Cafe
         planId: 'plan-1', // Starter Monthly
         paymentTerms: 'Immediate',
@@ -328,7 +328,7 @@
       },
       {
         id: 'sub-5',
-        subNumber: 'SUB-2026-005',
+        subNumber: 'SUBX-2026-005',
         customerId: 'cust-5', // Zenith Health Systems
         planId: 'plan-2',
         paymentTerms: 'Net 30',
@@ -350,9 +350,9 @@
     invoices: [
       {
         id: 'inv-1',
-        invoiceNumber: 'INV-2026-001',
+        invoiceNumber: 'INV-SUBX-001',
         subscriptionId: 'sub-1',
-        subNumber: 'SUB-2026-001',
+        subNumber: 'SUBX-2026-001',
         customerId: 'cust-1',
         issueDate: '2026-08-15',
         dueDate: '2026-09-15',
@@ -372,9 +372,9 @@
       },
       {
         id: 'inv-2',
-        invoiceNumber: 'INV-2026-002',
+        invoiceNumber: 'INV-SUBX-002',
         subscriptionId: 'sub-2',
-        subNumber: 'SUB-2026-002',
+        subNumber: 'SUBX-2026-002',
         customerId: 'cust-2',
         issueDate: '2026-01-10',
         dueDate: '2026-02-10',
@@ -393,9 +393,9 @@
       },
       {
         id: 'inv-3',
-        invoiceNumber: 'INV-2026-003',
+        invoiceNumber: 'INV-SUBX-003',
         subscriptionId: 'sub-3',
-        subNumber: 'SUB-2026-003',
+        subNumber: 'SUBX-2026-003',
         customerId: 'cust-3',
         issueDate: '2026-09-01',
         dueDate: '2026-10-01', // Past due!
@@ -413,9 +413,9 @@
       },
       {
         id: 'inv-4',
-        invoiceNumber: 'INV-2026-004',
+        invoiceNumber: 'INV-SUBX-004',
         subscriptionId: 'sub-4',
-        subNumber: 'SUB-2026-004',
+        subNumber: 'SUBX-2026-004',
         customerId: 'cust-4',
         issueDate: '2026-10-01',
         dueDate: '2026-10-01',
@@ -437,7 +437,7 @@
         id: 'pay-1',
         paymentRef: 'PAY-2026-8801',
         invoiceId: 'inv-1',
-        invoiceNumber: 'INV-2026-001',
+        invoiceNumber: 'INV-SUBX-001',
         customerId: 'cust-1',
         amount: 2498.14,
         date: '2026-08-20',
@@ -1606,7 +1606,7 @@ System Status: Healthy | Engine v2.6`;
     }
 
     const nextIdNum = DB.subscriptions.length + 1;
-    const subNumber = `SUB-2026-0${nextIdNum < 10 ? '0' + nextIdNum : nextIdNum}`;
+    const subNumber = `SUBX-2026-0${nextIdNum < 10 ? '0' + nextIdNum : nextIdNum}`;
 
     const newSub = {
       id: 'sub-' + Date.now(),
@@ -1839,7 +1839,7 @@ System Status: Healthy | Engine v2.6`;
     else if (sub.paymentTerms === 'Net 60') dueObj.setDate(dueObj.getDate() + 60);
 
     const nextInvNum = DB.invoices.length + 1;
-    const invoiceNumber = `INV-2026-0${nextInvNum < 10 ? '0' + nextInvNum : nextInvNum}`;
+    const invoiceNumber = `INV-SUBX-0${nextInvNum < 10 ? '0' + nextInvNum : nextInvNum}`;
 
     const newInvoice = {
       id: 'inv-' + Date.now(),
@@ -2901,10 +2901,282 @@ System Status: Healthy | Engine v2.6`;
   }
 
   // ==========================================
+  // PORTAL ENTRY & CREDENTIALS WORKFLOW
+  // ==========================================
+  let selectedLoginRole = 'admin'; // 'admin', 'staff', 'customer'
+
+  function setupPortalEntryWorkflow() {
+    const stepSelect = document.getElementById('entryStepSelectRole');
+    const stepLogin = document.getElementById('entryStepLogin');
+
+    const cardAdmin = document.getElementById('cardSelectAdmin');
+    const cardStaff = document.getElementById('cardSelectStaff');
+    const cardCustomer = document.getElementById('cardSelectCustomer');
+    const btnBack = document.getElementById('btnBackToRoles');
+    const btnLogout = document.getElementById('btnLogoutToPortal');
+
+    const btnNewSignIn = document.getElementById('btnEntryNewSignIn');
+    const btnOpenSignUp = document.getElementById('btnLoginOpenSignUp');
+    const btnEntryTheme = document.getElementById('btnEntryThemeToggle');
+
+    const formLogin = document.getElementById('formPortalLogin');
+    const inputUsername = document.getElementById('portalUsername');
+    const inputPassword = document.getElementById('portalPassword');
+    const errorMsg = document.getElementById('portalLoginError');
+
+    // Switch theme on entry screen
+    btnEntryTheme?.addEventListener('click', () => {
+      document.getElementById('btnThemeToggle')?.click();
+    });
+
+    // 1. Role Card Click handlers
+    cardAdmin?.addEventListener('click', () => openRoleLogin('admin'));
+    cardStaff?.addEventListener('click', () => openRoleLogin('staff'));
+    cardCustomer?.addEventListener('click', () => openRoleLogin('customer'));
+
+    // Back to 3 options
+    btnBack?.addEventListener('click', () => {
+      stepLogin.classList.add('hidden');
+      stepSelect.classList.remove('hidden');
+      errorMsg.classList.add('hidden');
+    });
+
+    // Log Out / Switch Portal from main app header
+    btnLogout?.addEventListener('click', () => {
+      document.body.classList.add('portal-active');
+      stepLogin.classList.add('hidden');
+      stepSelect.classList.remove('hidden');
+      inputUsername.value = '';
+      inputPassword.value = '';
+      errorMsg.classList.add('hidden');
+    });
+
+    // Sign In / Register buttons for new businesses finding Brightloop online
+    const openAuth = () => {
+      openModal('modalAuth');
+    };
+    btnNewSignIn?.addEventListener('click', openAuth);
+    btnOpenSignUp?.addEventListener('click', openAuth);
+
+    // 2. Open Role Login view with dynamic customized rules
+    function openRoleLogin(role) {
+      selectedLoginRole = role;
+      stepSelect.classList.add('hidden');
+      stepLogin.classList.remove('hidden');
+      errorMsg.classList.add('hidden');
+      inputUsername.value = '';
+      inputPassword.value = '';
+
+      const iconWrap = document.getElementById('loginRoleIcon');
+      const titleEl = document.getElementById('loginRoleTitle');
+      const subEl = document.getElementById('loginRoleSubtitle');
+      const ruleBox = document.getElementById('credentialRuleBox');
+
+      if (role === 'admin') {
+        iconWrap.className = 'login-role-icon-wrap icon-admin';
+        iconWrap.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+        titleEl.textContent = 'Admin Portal Login';
+        subEl.textContent = 'Single administrator authority over the entire SUBX system';
+        ruleBox.innerHTML = `
+          <div><strong>System Administrator Authentication:</strong></div>
+          <div style="margin-top: 4px; color: var(--text-muted);">Please enter your authorized administrator username and password to proceed. Credentials are strictly verified.</div>
+        `;
+        inputUsername.placeholder = 'Admin Email Address';
+        inputPassword.placeholder = '••••••••••••';
+      } else if (role === 'staff') {
+        iconWrap.className = 'login-role-icon-wrap icon-staff';
+        iconWrap.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`;
+        titleEl.textContent = 'Internal Staff Login';
+        subEl.textContent = 'Day-to-day customer quotes, subscription lifecycles, billing and payments';
+        ruleBox.innerHTML = `
+          <div><strong>Staff Access Requirement:</strong></div>
+          <div style="margin-top: 4px;">• Username format: <code>("NAME OF THE STAFF")SUBX@gmail.com</code> (e.g. <code>anilaSUBX@gmail.com</code>)</div>
+          <div>• Password: Enter your staff access password</div>
+        `;
+        inputUsername.placeholder = 'e.g. anilaSUBX@gmail.com';
+        inputPassword.placeholder = '••••••••••••';
+      } else if (role === 'customer') {
+        iconWrap.className = 'login-role-icon-wrap icon-customer';
+        iconWrap.innerHTML = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
+        titleEl.textContent = 'Customer Self-Service Portal';
+        subEl.textContent = 'Manage active subscriptions, toggle modular add-ons, and view/pay invoices';
+        ruleBox.innerHTML = `
+          <div><strong>Customer Account Security Requirements:</strong></div>
+          <div style="margin-top: 4px;">• Username: must be your <strong>email address</strong> (each email belongs to only one account).</div>
+          <div>• Password: must be <strong>more than 8 characters</strong>, with at least <strong>1 uppercase</strong>, <strong>1 lowercase</strong>, and <strong>1 special character</strong>.</div>
+          <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 4px;">If you forget your password, you can request a reset link to your registered email.</div>
+        `;
+        inputUsername.placeholder = 'name@business.com';
+        inputPassword.placeholder = '••••••••••••';
+      }
+
+      setTimeout(() => inputUsername.focus(), 50);
+    }
+
+    // 3. Form Submission & Validation per User Rules
+    formLogin?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = inputUsername.value.trim();
+      const p = inputPassword.value;
+
+      errorMsg.classList.add('hidden');
+      errorMsg.textContent = '';
+
+      if (selectedLoginRole === 'admin') {
+        // "there will be only one admin and the admin login password and username is preset for admin, as Admin@gmail.com and password as Admin@123 and it should be kept hidden.only we direct admins to the next page if they enter this usernasme and password ."
+        if (u.toLowerCase() === 'admin@gmail.com' && p === 'Admin@123') {
+          performSuccessfulLogin('admin', 'usr-admin-1', 'System Admin (Admin@gmail.com)');
+        } else {
+          showLoginError('Access Denied: Invalid administrator credentials.');
+        }
+      } else if (selectedLoginRole === 'staff') {
+        // "for staff, username should be in the format ("NAME OF THE STAFF")SUBX@gmail.com . and the password for staff is set as Admin#power.it should also be hidden"
+        const lowerU = u.toLowerCase();
+        const suffix = 'subx@gmail.com';
+        const hasValidFormat = lowerU.endsWith(suffix) && lowerU.length > suffix.length;
+
+        if (hasValidFormat && p === 'Admin#power') {
+          const rawName = u.slice(0, -suffix.length);
+          const staffName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+          performSuccessfulLogin('staff', 'usr-staff-2', `${staffName} (${u})`);
+        } else {
+          showLoginError('Access Denied: Invalid staff username or password. Username must be in the format ("NAME OF THE STAFF")SUBX@gmail.com.');
+        }
+      } else if (selectedLoginRole === 'customer') {
+        // "for customer, they can set whatever they like as pass and username (username should be an email address. Each email can belong to only one account, and the password must be more than eight characters, with an uppercase letter, a lowercase letter and a special character. If they forget it later, a reset link should arrive at their registered email."
+        
+        // 1. Email check
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(u)) {
+          showLoginError('Customer username must be a valid email address (e.g. client@business.com).');
+          return;
+        }
+
+        // 2. Strong password policy check
+        const policy = validatePasswordPolicy(p);
+        if (!policy.len || !policy.upper || !policy.lower || !policy.special) {
+          showLoginError('Password must be more than 8 characters, containing at least 1 uppercase letter, 1 lowercase letter, and 1 special character.');
+          return;
+        }
+
+        // 3. Unique email account check / registration
+        const lowerEmail = u.toLowerCase();
+        let existingUser = DB.users.find(usr => usr.email.toLowerCase() === lowerEmail);
+
+        if (!existingUser) {
+          // Register this new customer account with their unique email & password
+          const displayName = u.split('@')[0];
+          const formattedName = displayName.charAt(0).toUpperCase() + displayName.slice(1) + ' Ltd.';
+          const newCustId = 'cust-' + Date.now();
+          
+          existingUser = {
+            id: 'usr-cust-' + Date.now(),
+            name: formattedName,
+            email: u,
+            password: p,
+            role: 'customer',
+            dept: 'Client Portal',
+            status: 'Active',
+            lastActive: 'Just now'
+          };
+
+          DB.users.push(existingUser);
+          DB.customers.push({
+            id: newCustId,
+            name: formattedName,
+            email: u,
+            phone: '+1 (555) 800-SUBX',
+            address: 'Online Registered Subscriber',
+            tier: 'Standard'
+          });
+
+          // Create a starter subscription for this new customer
+          DB.subscriptions.push({
+            id: 'sub-' + Date.now(),
+            subNumber: `SUBX-2026-0${DB.subscriptions.length + 1}`,
+            customerId: newCustId,
+            planId: 'plan-1',
+            paymentTerms: 'Immediate',
+            startDate: DB.simulationDate,
+            expiryDate: '2027-10-31',
+            nextBillingDate: '2026-11-30',
+            lastBilledDate: DB.simulationDate,
+            stage: 'Active',
+            discountCode: null,
+            lines: [
+              { productId: 'prod-1', variantName: 'Standard Edition', qty: 1, unitPrice: 299.00, taxRate: 0.0825 }
+            ],
+            logs: [{ date: DB.simulationDate, event: 'Account self-registered via SUBX portal' }]
+          });
+
+          saveState();
+          showToast(`New customer account created for ${u}! Unique email registered.`, 'success', 'Account Registered');
+        } else {
+          // If already belongs to non-customer (e.g. admin or staff)
+          if (existingUser.role !== 'customer') {
+            showLoginError(`Email "${u}" is registered as an internal ${existingUser.role.toUpperCase()} account and cannot be used for customer portal.`);
+            return;
+          }
+        }
+
+        performSuccessfulLogin('customer', existingUser.id, existingUser.name);
+      }
+    });
+
+    function showLoginError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.remove('hidden');
+    }
+
+    function performSuccessfulLogin(role, defaultUserId, displayName) {
+      document.body.classList.remove('portal-active');
+
+      let targetUser = DB.users.find(usr => usr.id === defaultUserId) || DB.users.find(usr => usr.role === role);
+      if (!targetUser) {
+        targetUser = {
+          id: 'usr-' + Date.now(),
+          name: displayName,
+          email: `${role}@brightloop.io`,
+          role: role,
+          dept: role === 'admin' ? 'Executive' : (role === 'staff' ? 'Sales / Staff' : 'Client'),
+          status: 'Active',
+          lastActive: 'Just now'
+        };
+        DB.users.push(targetUser);
+      } else if (displayName) {
+        targetUser.name = displayName;
+      }
+
+      const initials = (targetUser.name || 'US').split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'BL';
+      DB.currentUser = {
+        id: targetUser.id,
+        name: targetUser.name,
+        email: targetUser.email,
+        role: role,
+        avatar: initials
+      };
+      saveState();
+
+      updatePersonaUI();
+      if (role === 'customer') {
+        navigateToView('customer-portal');
+      } else if (role === 'staff') {
+        navigateToView('subscriptions');
+      } else {
+        navigateToView('dashboard');
+      }
+      renderAll();
+
+      showToast(`Welcome ${targetUser.name}! Signed into ${role.toUpperCase()} workspace.`, 'success', 'Login Successful');
+    }
+  }
+
+  // ==========================================
   // INITIALIZATION ON DOM READY
   // ==========================================
   function init() {
     setupThemeToggle();
+    setupPortalEntryWorkflow();
     setupPersonaSwitching();
     setupNavigation();
     setupAuthForms();

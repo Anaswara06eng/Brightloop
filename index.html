@@ -3,14 +3,140 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brightloop Software — Unified Subscription Business Platform</title>
-  <meta name="description" content="All-in-one subscription management, billing engine, quotation lifecycle, automated invoicing, discount rules, and real-time revenue analytics for Brightloop Software.">
+  <title>SUBX — Unified Subscription Business Management Platform | Brightloop Software</title>
+  <meta name="description" content="SUBX: All-in-one subscription management, billing engine, quotation lifecycle, automated invoicing, discount rules, and real-time revenue analytics for Brightloop Software.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="theme-light">
+<body class="theme-light portal-active">
+  <!-- ==================== SUBX PORTAL LANDING ENTRY SCREEN ==================== -->
+  <div class="portal-entry-overlay" id="portalEntryScreen">
+    <div class="entry-header-bar">
+      <div class="brand-badge">
+        <div class="brand-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">SUBX<span class="brand-accent">.</span></span>
+          <span class="brand-subtitle">Brightloop Software</span>
+        </div>
+      </div>
+      <div class="entry-header-actions">
+        <button class="btn btn-ghost btn-sm" id="btnEntryThemeToggle" title="Toggle Dark/Light Mode">
+          🌓 Theme
+        </button>
+      </div>
+    </div>
+
+    <div class="entry-content-wrap">
+      <!-- Step 1: 3 Role Selection Options -->
+      <div class="entry-step" id="entryStepSelectRole">
+        <div class="entry-hero-text">
+          <span class="badge badge-quotation mb-2">SUBX Subscription Management System</span>
+          <h1 class="entry-headline">Welcome to SUBX</h1>
+          <p class="entry-subhead">One unified software platform for Brightloop Software to run products, plans, quotes, billing, payments and revenue. Select an option to proceed:</p>
+        </div>
+
+        <div class="portal-cards-grid">
+          <!-- Option 1: Admin -->
+          <div class="portal-card" id="cardSelectAdmin" data-role="admin">
+            <div class="portal-card-badge">Single Admin Authority</div>
+            <div class="portal-card-icon icon-admin">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h2 class="portal-card-title">Admin</h2>
+            <p class="portal-card-desc">Sole system administrator: configure products, brand variants (e.g. Odoo brand +560), plans & lifecycle rules, discount codes, staff access control & finance executive reporting.</p>
+            <div class="portal-card-action">
+              <span class="portal-action-btn">Enter as Admin &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Option 2: Staff -->
+          <div class="portal-card" id="cardSelectStaff" data-role="staff">
+            <div class="portal-card-badge">Internal Operations</div>
+            <div class="portal-card-icon icon-staff">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h2 class="portal-card-title">Staff</h2>
+            <p class="portal-card-desc">Internal team: prepare quotations from templates, advance subscription lifecycles, run automated deduplicated billing day & record incoming payments.</p>
+            <div class="portal-card-action">
+              <span class="portal-action-btn">Enter as Staff &rarr;</span>
+            </div>
+          </div>
+
+          <!-- Option 3: Customer -->
+          <div class="portal-card" id="cardSelectCustomer" data-role="customer">
+            <div class="portal-card-badge">Customer Portal</div>
+            <div class="portal-card-icon icon-customer">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            </div>
+            <h2 class="portal-card-title">Customer</h2>
+            <p class="portal-card-desc">Client self-service: inspect active subscriptions, toggle modular add-ons on/off live without emailing support, and view/pay invoices online.</p>
+            <div class="portal-card-action">
+              <span class="portal-action-btn">Enter as Customer &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Another option below: Sign In / Sign Up for new businesses -->
+        <div class="entry-bottom-bar">
+          <div class="entry-bottom-content">
+            <span class="entry-bottom-text">New small business finding Brightloop online?</span>
+            <button type="button" class="btn btn-outline btn-sm" id="btnEntryNewSignIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+              Sign In / Register New Account
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Dedicated Credentials Login Interface for Selected Role -->
+      <div class="entry-step hidden" id="entryStepLogin">
+        <div class="login-box glass-card">
+          <button type="button" class="btn btn-ghost btn-sm btn-back-roles" id="btnBackToRoles">
+            &larr; Back to Role Selection
+          </button>
+
+          <div class="login-header text-center mt-2">
+            <div class="login-role-icon-wrap" id="loginRoleIcon"></div>
+            <h2 class="login-title" id="loginRoleTitle">SUBX Portal Login</h2>
+            <p class="login-subtitle" id="loginRoleSubtitle">Enter your credentials to access SUBX by Brightloop</p>
+          </div>
+
+          <!-- Credential Rules Help Banner -->
+          <div class="credential-rule-box" id="credentialRuleBox"></div>
+
+          <form id="formPortalLogin" class="mt-4">
+            <div class="form-group">
+              <label for="portalUsername" id="lblPortalUsername">Username / Email <span class="required">*</span></label>
+              <input type="text" id="portalUsername" class="form-control" placeholder="Enter username or email" required autofocus autocomplete="username">
+            </div>
+
+            <div class="form-group">
+              <label for="portalPassword">Password <span class="required">*</span></label>
+              <input type="password" id="portalPassword" class="form-control" placeholder="Enter password" required autocomplete="current-password">
+            </div>
+
+            <div class="login-error-msg hidden" id="portalLoginError"></div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-4" id="btnSubmitPortalLogin">
+              Sign In to SUBX
+            </button>
+          </form>
+
+          <div class="login-card-footer mt-4 text-center">
+            <span class="text-xs text-muted">New business finding Brightloop online?</span>
+            <button type="button" class="btn btn-link text-xs ml-1" id="btnLoginOpenSignUp">Sign In / Register New Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Top App Navigation / Role Switcher Header -->
   <header class="app-header">
     <div class="header-left">
@@ -21,15 +147,15 @@
           </svg>
         </div>
         <div class="brand-info">
-          <span class="brand-title">Brightloop<span class="brand-accent">.</span></span>
-          <span class="brand-subtitle">Subscription OS</span>
+          <span class="brand-title">SUBX<span class="brand-accent">.</span></span>
+          <span class="brand-subtitle">Brightloop Software</span>
         </div>
       </div>
 
       <div class="system-status-indicator">
         <span class="pulse-dot"></span>
-        <span class="status-label">Engine Online</span>
-        <span class="version-tag">v2.6 Unified</span>
+        <span class="status-label">SUBX Online</span>
+        <span class="version-tag">v3.0 Unified</span>
       </div>
     </div>
 
@@ -71,9 +197,14 @@
           <span class="user-role-badge" id="headerUserRoleBadge">Admin</span>
         </div>
         <button class="btn btn-ghost btn-sm btn-icon" id="btnAuthModalToggle" title="Account Settings & Auth">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </button>
       </div>
+
+      <button class="btn btn-outline btn-sm" id="btnLogoutToPortal" title="Log out and return to role selection portal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Switch Portal / Log Out
+      </button>
     </div>
   </header>
 
